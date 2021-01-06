@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'chargeback_mvp_model
+
+  A "Lower level chargeback model" script to help our Finance team fairly distribute
+  and allocate costs incurred to Application teams based on consumption for all the
+  services we deem "Shared Services or Enablement Services" for the organisation.
+
+  '
+Globals:
+  Function:
+    Timeout: 900
+    AutoPublishAlias:
+      Ref: MyEnvironment
+    Environment:
+      Variables:
+        ENVIRONMENT:
+          Ref: MyEnvironment
+Parameters:
+  MyEnvironment:
+    Type: String
+    Default: testing
+    AllowedValues:
+    - testing
+    - staging
+    - prod
+    Description: Environment of this stack of resources
+Resources:
+  ChargebackModelFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      MemorySize: 1024
+      CodeUri: ChargebackModelFunction
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Role: arn:aws:iam::753211316449:role/BoundedLambdaExecutionRole
+      Description: Runs resource consumption evaluation to check how much bytes have
+        been consumed by App teams while connecting to the bank
+      Environment:
+        Variables:
+          ENVIRONMENT:
+            Ref: MyEnvironment
+          RUNNING_LOCALLY: false

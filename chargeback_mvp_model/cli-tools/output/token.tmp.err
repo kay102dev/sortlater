@@ -1,0 +1,27 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/botocore/configloader.py", line 149, in raw_config_parse
+    cp.read([path])
+  File "/usr/local/Cellar/python@3.8/3.8.2/Frameworks/Python.framework/Versions/3.8/lib/python3.8/configparser.py", line 697, in read
+    self._read(fp, filename)
+  File "/usr/local/Cellar/python@3.8/3.8.2/Frameworks/Python.framework/Versions/3.8/lib/python3.8/configparser.py", line 1093, in _read
+    raise DuplicateOptionError(sectname, optname,
+configparser.DuplicateOptionError: While reading from '/Users/kay9/.aws/config' [line 47]: option 'azure_tenant_id' in section 'profile annual-reporting-sandbox-federate' already exists
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/bin/aws", line 27, in <module>
+    sys.exit(main())
+  File "/usr/local/bin/aws", line 23, in main
+    return awscli.clidriver.main()
+  File "/usr/local/lib/python3.8/site-packages/awscli/clidriver.py", line 68, in main
+    driver = create_clidriver()
+  File "/usr/local/lib/python3.8/site-packages/awscli/clidriver.py", line 77, in create_clidriver
+    load_plugins(session.full_config.get('plugins', {}),
+  File "/usr/local/lib/python3.8/site-packages/botocore/session.py", line 354, in full_config
+    self._config = botocore.configloader.load_config(config_file)
+  File "/usr/local/lib/python3.8/site-packages/botocore/configloader.py", line 106, in load_config
+    parsed = raw_config_parse(config_filename)
+  File "/usr/local/lib/python3.8/site-packages/botocore/configloader.py", line 151, in raw_config_parse
+    raise botocore.exceptions.ConfigParseError(
+botocore.exceptions.ConfigParseError: Unable to parse config file: /Users/kay9/.aws/config
